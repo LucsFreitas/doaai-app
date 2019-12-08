@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, AsyncStorage, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, AsyncStorage, Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
+import logo from '../../assets/logo.png';
 
 export default function Login({ navigation }) {
   const [login, setLogin] = useState('');
@@ -19,12 +21,14 @@ export default function Login({ navigation }) {
         navigation.navigate('Home');
     }
     else {
-        Alert.alert('Login/senha inválidos.');
+        Alert.alert('Login e/ou Senha inválidos.');
     }
   }
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <Image source={logo}/>
+      
       <View style={styles.form}>
         <Text style={styles.label}>Login *</Text>
         <TextInput
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
 
   button: {
     height: 42,
-    backgroundColor: '#f05a5b',
+    backgroundColor: '#33ace0',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 2,
