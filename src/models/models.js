@@ -2,14 +2,14 @@ const children = [
     {
       id: 1,
       name: 'Brenon Rufino Barbosa',
-      age: 15,
+      age: 12,
       neighborhood: 'Águas Compridas',
     },
     {
       id: 2,
-      name: 'Brenon Rufino Barbosa',
-      age: 15,
-      neighborhood: 'Águas Compridas',
+      name: 'Yasmin Feitosa',
+      age: 7,
+      neighborhood: 'Ipsep',
     },
     {
       id: 3,

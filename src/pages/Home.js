@@ -24,11 +24,13 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     alignSelf: 'center',
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    backgroundColor: '#eee'
   },
 
   safeAreView: {
-    paddingTop: Platform.OS === 'android' ? 25 : 0
+    paddingTop: Platform.OS === 'android' ? 25 : 0,
+    backgroundColor: '#eee',
   }
 
 });
