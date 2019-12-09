@@ -5,9 +5,11 @@ import { View, StyleSheet, Text } from 'react-native';
 function ChildList({ child, }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>{child.name}</Text>
-      <Text style={styles.details}>{`Idade: ${child.age} anos`}</Text>
-      <Text style={styles.details}>{`Bairro: ${child.neighborhood}`}</Text>
+      <View style={styles.postContainer}>
+        <Text style={styles.postTitle}>{child.name}</Text>
+        <Text style={styles.postDetails}>{`Idade: ${child.age} anos`}</Text>
+        <Text style={styles.postDetails}>{`Bairro: ${child.neighborhood}`}</Text>
+      </View>  
     </View>
   )
 }
@@ -15,19 +17,25 @@ function ChildList({ child, }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#333"
   },
 
-  name: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginTop: 10,
+  postContainer: {
+    marginHorizontal: 20,
+    marginVertical: 10,
+    padding: 20,
+    backgroundColor: "#FFF",
+    borderRadius: 5
   },
 
-  details: {
-    fontSize: 20,
-    color: '#999',
-    marginTop: 5
+  postTitle:{
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5
+  },
+
+  postDetails: {
+    color: '#666'
   },
 });
 
