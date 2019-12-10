@@ -1,28 +1,35 @@
-import React from 'react';
-import { Image, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { Image, Platform, SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import ChildList from '../components/ChildList';
 import company from '../../assets/company.png';
 import children from '../models/models';
-import globalStyles from '../GlobalStyles';
 
-export default function Home ({ navigation }) {
-
-  navigateToDetail = function () {
-    navigation.navigate('ChildDetails');
-  }
+export default function Home(){
 
   return (
-    <SafeAreaView style={globalStyles.safeAreaView}>
-      <Image style={globalStyles.company} source={company}/>
+    <SafeAreaView style={styles.safeAreView}>
+      <Image style={styles.company} source={company}/>
 
       <ScrollView>
-        { children.map(item => (
-          <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
-              <ChildList child={item}/>
-          </TouchableOpacity>
-        ))}
+        { children.map(item => <ChildList key={item.id} child={item}/>) }
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  company: {
+    height: 32,
+    resizeMode: "contain",
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10
+  },
+
+  safeAreView: {
+    paddingTop: Platform.OS === 'android' ? 25 : 0
+  }
+
+});
+
