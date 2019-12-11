@@ -8,8 +8,8 @@ import globalStyles from '../GlobalStyles';
 
 export default function Home ({ navigation }) {
 
-  navigateToDetail = function () {
-    navigation.navigate('ChildDetails');
+  navigateToDetail = function (child) {
+    navigation.navigate('ChildDetails', { child });
   }
 
   return (

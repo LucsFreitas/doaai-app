@@ -1,41 +1,50 @@
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import company from '../../assets/company.png';
 import children from '../models/models';
 import globalStyles from '../GlobalStyles';
 
-export default function ChildDetails({ Child }){
+// export default function ChildDetails({ navigation, child }){
+  export default class ChildDetails extends React.Component{
 
-  return (
-    <SafeAreaView style={globalStyles.safeAreaView}>
-      <Image style={globalStyles.company} source={company}/>
+    render () {
+      const { navigation } = this.props;
+      const child = navigation.getParam('child', 'undefined');
 
-      { children.push(item => <ChildList key={item.id} child={item}/>) }
+      voltar = () => {
+        navigation.navigate('Home');
+      }
+  
+      confirmar = () => {
+        navigation.navigate('Home');
+      }
 
-      <View style={styles.container}>
-        <Text style={styles.label}>Nome</Text>
-        <Text style={styles.childName}>{item.name}</Text>
-        <Text style={styles.label}>Idade</Text>
-        <Text style={styles.childName}>{item.age}</Text>
-        <Text style={styles.label}>Endereco</Text>
-        <Text style={styles.childName}>{item.neighborhood}</Text>
-        <Text style={styles.label}>Pedido</Text>
-        <Text style={styles.childName}>{item.text}</Text>
-      </View>
+      return (
+        <SafeAreaView style={globalStyles.safeAreaView}>
+          <Image style={globalStyles.company} source={company}/>
 
-      
+          <View style={styles.container}>
+            <Text style={styles.label}>Nome:</Text>
+            <Text style={styles.childName}>{child.name}</Text>
+            <Text style={styles.label}>Idade:</Text>
+            <Text style={styles.childName}>{child.age}</Text>
+            <Text style={styles.label}>Endereço:</Text>
+            <Text style={styles.childName}>{child.neighborhood}</Text>
+            <Text style={styles.label}>Pedido:</Text>
+            <Text style={styles.childName}>{child.text}</Text>
+          </View>
 
-      
-      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Confirmar</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Voltar</Text>
-      </TouchableOpacity>
+          <TouchableOpacity onPress={confirmar} style={styles.button}>
+              <Text style={styles.buttonText}>Confirmar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={voltar} style={styles.button}>
+              <Text style={styles.buttonText}>Voltar</Text>
+          </TouchableOpacity>
 
-    </SafeAreaView>
-  )
+        </SafeAreaView>
+      )
+    }
 }
 
 const styles = StyleSheet.create({
