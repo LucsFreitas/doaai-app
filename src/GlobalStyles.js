@@ -7,7 +7,6 @@ const globalStyles = StyleSheet.create({
       resizeMode: 'contain',
       alignSelf: 'center',
       marginTop: 10,
-      marginBottom: 10
     },
   
     safeAreaView: {

@@ -6,9 +6,9 @@ function ListaPedido({ pedido, }) {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.childName}>{pedido.crianca.nome}</Text>
-        <Text style={styles.childDetails}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
-        <Text style={styles.childDetails}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
+        <Text style={styles.nome}>{pedido.crianca.nome}</Text>
+        <Text style={styles.detalhes}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
+        <Text style={styles.detalhes}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
     </View>
   )
 }
@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
 
-  childName:{
+  nome:{
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 5
   },
 
-  childDetails: {
+  detalhes: {
     color: '#666'
   },
 });

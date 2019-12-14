@@ -1,51 +1,60 @@
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import company from '../../assets/company.png';
 import globalStyles from '../GlobalStyles';
 
-// export default function ChildDetails({ navigation, child }){
-  export default class ChildDetails extends React.Component{
+export default class ChildDetails extends React.Component{
 
-    render () {
-      const { navigation } = this.props;
-      const pedido = navigation.getParam('pedido', 'undefined');
+  render () {
+    const { navigation } = this.props;
+    const pedido = navigation.getParam('pedido', 'undefined');
 
-      voltar = () => {
-        navigation.navigate('Home');
-      }
-  
-      confirmar = () => {
-        navigation.navigate('Home');
-      }
-
-      return (
-        <View style={globalStyles.safeAreaView}>
-          <Image style={globalStyles.company} source={company}/>
-
-            <Text style={styles.tituloDetalhe}>Nome:</Text>
-            <Text style={styles.detalhe}>{pedido.crianca.nome}</Text>
-            <Text style={styles.tituloDetalhe}>Idade:</Text>
-            <Text style={styles.detalhe}>{pedido.crianca.nome}</Text>
-            <Text style={styles.tituloDetalhe}>Endereço:</Text>
-            <Text style={styles.detalhe}>{pedido.crianca.bairro}</Text>
-            <Text style={styles.tituloDetalhe}>Pedido:</Text>
-            <Text style={styles.detalhe}>{pedido.textoPedido}</Text>
-
-            <TouchableOpacity onPress={confirmar} style={styles.button}>
-                <Text style={styles.buttonText}>Confirmar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={voltar} style={styles.button}>
-                <Text style={styles.buttonText}>Voltar</Text>
-            </TouchableOpacity>
-        </View>
-      )
+    voltar = () => {
+      navigation.navigate('Home');
     }
+
+    confirmar = () => {
+      navigation.navigate('Home');
+    }
+
+    return (
+      <View style={globalStyles.safeAreaView}>
+        <Image style={globalStyles.company} source={company}/>
+
+        <View style={styles.container}>
+          <Text style={styles.nome}>{`${pedido.crianca.nome}`}</Text>
+          {/* <Text style={styles.detalhe}>{pedido.crianca.nome}</Text> */}
+          <Text style={styles.tituloDetalhe}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
+          <Text style={styles.tituloDetalhe}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
+          <Text style={styles.tituloPedido}>Pedido:</Text>
+
+          {/* <Text style={styles.tituloDetalhe}>Nome:</Text>
+          <Text style={styles.detalhe}>{pedido.crianca.nome}</Text>
+          <Text style={styles.tituloDetalhe}>Idade:</Text>
+          <Text style={styles.detalhe}>{`${pedido.crianca.idade} anos`}</Text>
+          <Text style={styles.tituloDetalhe}>Bairro:</Text>
+          <Text style={styles.detalhe}>{pedido.crianca.bairro}</Text>
+          <Text style={styles.tituloDetalhe}>Pedido:</Text> */}
+          {/* <ScrollView> */}
+            <Text style={styles.textoPedido}>{pedido.textoPedido}</Text>
+          {/* </ScrollView> */}
+        </View>
+
+        <View style={styles.buttons}>
+          <TouchableOpacity onPress={confirmar} style={styles.button}>
+              <Text style={styles.buttonText}>Confirmar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   button: {
     height: 42,
+    width: 300,
     backgroundColor: '#33ace0',
     justifyContent: 'center',
     alignItems: 'center',
@@ -53,7 +62,8 @@ const styles = StyleSheet.create({
   },
 
   buttons: {
-    marginBottom: 0
+    marginBottom: 10,
+    alignItems: 'center',
   },
 
   buttonText: {
@@ -64,20 +74,37 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
   },
 
   tituloDetalhe:{
     fontSize: 18,
+    color: '#333',
+  },
+
+  tituloPedido:{
+    fontSize: 18,
+    color: '#333',
     fontWeight: "bold",
-    marginBottom: 5,
+    marginTop: 10
+  },
+
+  nome:{
+    fontSize: 22,
+    fontWeight: "bold",
     marginTop: 10
   },
 
   detalhe: {
-    color: '#666'
-  }
+    fontSize: 18,
+  },
+
+  textoPedido: {
+    fontSize: 17,
+    textAlign:'justify',
+  },
 
 });
 
