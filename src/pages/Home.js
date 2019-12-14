@@ -1,28 +1,35 @@
-import React from 'react';
-import { Image, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 
-import ChildList from '../components/ChildList';
+import api from '../services/api';
+import ListaPedido from '../components/ListaPedido';
 import company from '../../assets/company.png';
-import children from '../models/models';
 import globalStyles from '../GlobalStyles';
 
 export default function Home ({ navigation }) {
+  const [pedidos, setPedidos] = useState([]);
 
-  navigateToDetail = function (child) {
-    navigation.navigate('ChildDetails', { child });
+  useEffect(() => {
+    api.get('/pedido')
+      .then((response) => response.data)
+      .then((data) => setPedidos(data))
+  }, []);
+
+  navigateToDetail = function (pedido) {
+    navigation.navigate('DetalhePedido', { pedido });
   }
 
   return (
-    <SafeAreaView style={globalStyles.safeAreaView}>
+    <View style={globalStyles.safeAreaView}>
       <Image style={globalStyles.company} source={company}/>
 
       <ScrollView>
-        { children.map(item => (
+        { pedidos.map(item => (
           <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
-              <ChildList child={item}/>
+              <ListaPedido pedido={item}/>
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }

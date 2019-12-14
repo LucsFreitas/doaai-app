@@ -11,9 +11,9 @@ const globalStyles = StyleSheet.create({
     },
   
     safeAreaView: {
+      flex: 1,
       marginTop: Constants.statusBarHeight,
       backgroundColor: '#eee',
-      marginBottom: 60,
     }
   
 });

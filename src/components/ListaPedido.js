@@ -2,12 +2,13 @@ import React from 'react';
 import { withNavigation } from 'react-navigation';
 import { View, StyleSheet, Text } from 'react-native';
 
-function ChildList({ child, }) {
+function ListaPedido({ pedido, }) {
+
   return (
     <View style={styles.container}>
-        <Text style={styles.childName}>{child.name}</Text>
-        <Text style={styles.childDetails}>{`Idade: ${child.age} anos`}</Text>
-        <Text style={styles.childDetails}>{`Bairro: ${child.neighborhood}`}</Text>
+        <Text style={styles.childName}>{pedido.crianca.nome}</Text>
+        <Text style={styles.childDetails}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
+        <Text style={styles.childDetails}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
     </View>
   )
 }
@@ -33,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ChildList);
+export default withNavigation(ListaPedido);

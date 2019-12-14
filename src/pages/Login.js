@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, AsyncStorage, Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, AsyncStorage, Image, Keyboard, KeyboardAvoidingView,
+  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import logo from '../../assets/logo.png';
+import api from '../services/api';
 
 export default function Login({ navigation }) {
   const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
 
   useEffect(() => {
     AsyncStorage.getItem('user').then(user => {
@@ -16,13 +18,25 @@ export default function Login({ navigation }) {
   }, []);
 
   async function handleSubmit() {
-    if (login === "admin" && password === "123") {
-        await AsyncStorage.setItem('user', login);
-        navigation.navigate('Home');
-    }
-    else {
-        Alert.alert('Login e/ou Senha inválidos.');
-    }
+    Keyboard.dismiss();
+    
+    api.post('/login', { login, senha })
+      .then(response => response.data)
+      .then((data) => {
+        if (data.login){
+          AsyncStorage.setItem('user', data.login);
+          navigation.navigate('Home');
+        }
+        else {
+          showIndicator = false;
+          Alert.alert('Usuário/Senha inválidos');
+        }
+      })
+      .catch( error => {
+        console.log(error);
+        showIndicator = false;
+        Alert.alert('Desculpe, ocorreu um erro interno da aplicação.');
+      });
   }
 
   return (
@@ -47,8 +61,8 @@ export default function Login({ navigation }) {
           placeholder="Senha..."
           placeholderTextColor="#999"
           secureTextEntry={true}
-          value={password}
-          onChangeText={setPassword}
+          value={senha}
+          onChangeText={setSenha}
         />
 
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
