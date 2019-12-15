@@ -3,13 +3,13 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 
 import Login from './pages/authPages/Login';
 import SignIn from './pages/authPages/SignIn';
 import DoacoesPendentes from './pages/DoacoesPendentes';
 import MinhasDoacoes from './pages/MinhasDoacoes';
-import ConfigPage from './pages/ConfigPage';
+import MaisPage from './pages/MaisPage';
 import DetalheDoacao from './pages/DetalheDoacao';
 import AuthLoadingScreen from './pages/AuthLoadingScreen';
 
@@ -20,7 +20,7 @@ const MainApp = createBottomTabNavigator(
   {
     DoacoesPendentesStack,
     MinhasDoacoesStack,
-    ConfigPage,
+    MaisPage,
   },
   {
     initialRouteName: 'DoacoesPendentesStack',
@@ -32,8 +32,8 @@ const MainApp = createBottomTabNavigator(
           iconName = 'list-ul';
         } else if (routeName === 'MinhasDoacoesStack') {
           iconName = 'user';
-        } else if (routeName === 'ConfigPage') {
-          iconName = 'cog';
+        } else if (routeName === 'MaisPage') {
+          iconName = 'ellipsis-h';
         }
 
         return <Icon color={tintColor} type={'font-awesome'} name={iconName} size={25}/>
@@ -45,8 +45,8 @@ const MainApp = createBottomTabNavigator(
           tabLabel = 'Doar';
         } else if (routeName === 'MinhasDoacoesStack') {
           tabLabel = 'Minhas Doações';
-        } else if (routeName === 'ConfigPage') {
-          tabLabel = 'Configurações';
+        } else if (routeName === 'MaisPage') {
+          tabLabel = 'Mais';
         }
         return <Text
           style={{

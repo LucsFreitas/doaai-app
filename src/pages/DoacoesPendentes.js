@@ -1,10 +1,8 @@
 import React from 'react';
 import { 
   ActivityIndicator,
-  AsyncStorage,
   FlatList,
   StyleSheet,
-  Button,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -19,34 +17,9 @@ export default class DoacoesPendentes extends React.Component  {
     isRequesting: false
   };
 
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Doações Pendentes',
-      headerRight: () => (
-        <Button
-          onPress={() => {
-            AsyncStorage.clear();
-            navigation.navigate('Login');
-          }}
-          title="Sair"
-          color="#f88"
-        />
-      ),
-    }
+  static navigationOptions = {
+    headerShown: false
   };
-
-  static tabBarOptions = () => {
-    return {
-      title: 'Doações Pendentes',
-      activeTintColor: '#e91e63',
-      labelStyle: {
-        fontSize: 12,
-      },
-      style: {
-        backgroundColor: 'blue',
-      },
-    }
-  }
 
   componentDidMount() {
     this.setState({ isRequesting: true });

@@ -4,7 +4,6 @@ import {
   AsyncStorage,
   FlatList,
   StyleSheet,
-  Button,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -19,20 +18,8 @@ export default class MinhasDoacoes extends React.Component  {
     isRequesting: false
   };
 
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Minhas Doações',
-      headerRight: () => (
-        <Button
-          onPress={() => {
-            AsyncStorage.clear();
-            navigation.navigate('Login');
-          }}
-          title="Sair"
-          color="#f88"
-        />
-      ),
-    }
+  static navigationOptions = {
+    headerShown: false
   };
 
   componentDidMount() {
