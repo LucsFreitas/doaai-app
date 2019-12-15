@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { 
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import api from '../services/api';
 import ListaPedido from '../components/ListaPedido';

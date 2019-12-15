@@ -1,6 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, AsyncStorage, Image, Keyboard, KeyboardAvoidingView,
-  StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { 
+  Alert,
+  AsyncStorage,
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import logo from '../../assets/logo.png';
 import api from '../services/api';

@@ -1,6 +1,10 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
-import { View, StyleSheet, Text } from 'react-native';
+import { 
+  View,
+  StyleSheet,
+  Text,
+} from 'react-native';
 
 function ListaPedido({ pedido, }) {
 
