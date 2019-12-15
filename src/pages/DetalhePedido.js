@@ -11,7 +11,7 @@ import {
 import company from '../../assets/company.png';
 import globalStyles from '../GlobalStyles';
 
-export default class ChildDetails extends React.Component{
+export default class DetalhePedido extends React.Component{
 
   render () {
     const { navigation } = this.props;

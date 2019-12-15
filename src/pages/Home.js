@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { 
   FlatList,
   StyleSheet,
@@ -10,33 +10,37 @@ import api from '../services/api';
 import ListaPedido from '../components/ListaPedido';
 import globalStyles from '../GlobalStyles';
 
-export default function Home ({ navigation }) {
-  const [pedidos, setPedidos] = useState([]);
+export default class Home extends React.Component  {
+  state = {
+    pedidos: []
+  };
 
-  useEffect(() => {
+  componentDidMount() {
     api.get('/pedido')
       .then((response) => response.data)
-      .then((data) => setPedidos(data))
-  }, []);
-
-  navigateToDetail = function (pedido) {
-    navigation.navigate('DetalhePedido', { pedido });
+      .then((data) => this.setState({ pedidos: data }));
   }
 
-  return (
-    <View style={globalStyles.safeAreaView}>
-      <FlatList
-        data={pedidos}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
-              <ListaPedido pedido={item}/>
-          </TouchableOpacity>
-        )}
-        style={styles.container}
-      />
-    </View>
-  )
+  navigateToDetail = function (pedido) {
+    this.props.navigation.navigate('DetalhePedido', { pedido });
+  }
+
+  render () {
+    return (
+      <View style={globalStyles.safeAreaView}>
+        <FlatList
+          data={this.state.pedidos}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
+                <ListaPedido pedido={item}/>
+            </TouchableOpacity>
+          )}
+          style={styles.container}
+        />
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

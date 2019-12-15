@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Alert,
   AsyncStorage,
@@ -15,64 +15,65 @@ import {
 import logo from '../../assets/logo.png';
 import api from '../services/api';
 
-export default function Login({ navigation }) {
-  const [login, setLogin] = useState('');
-  const [senha, setSenha] = useState('');
+export default class Login extends React.Component {
+  state = {
+    login: "",
+    senha: "",
+  };
 
-  async function handleSubmit() {
+  handleSubmit = () => {
     Keyboard.dismiss();
-    
-    api.post('/login', { login, senha })
+    console.log(this.state);
+    api.post('/login', { login: this.state.login, senha: this.state.senha })
       .then(response => response.data)
       .then((data) => {
         if (data.login){
           AsyncStorage.setItem('user', data.login);
-          navigation.navigate('Home');
+          this.props.navigation.navigate('Home');
         }
         else {
-          showIndicator = false;
           Alert.alert('Usuário/Senha inválidos');
         }
       })
-      .catch( error => {
-        console.log(error);
-        showIndicator = false;
+      .catch(() => {
         Alert.alert('Desculpe, ocorreu um erro interno da aplicação.');
       });
   }
 
-  return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <Image source={logo}/>
-      
-      <View style={styles.form}>
-        <Text style={styles.label}>Login *</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Seu login"
-          placeholderTextColor="#999"
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={login}
-          onChangeText={setLogin}
-        />
+  render () {
+    return (
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Image source={logo}/>
+        
+        <View style={styles.form}>
+          <Text style={styles.label}>Login *</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Seu login"
+            placeholderTextColor="#999"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={this.state.login}
+            onChangeText={(login) => this.setState({ login })}
+          />
 
-        <Text style={styles.label}>Senha *</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Senha..."
-          placeholderTextColor="#999"
-          secureTextEntry={true}
-          value={senha}
-          onChangeText={setSenha}
-        />
+          <Text style={styles.label}>Senha *</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Senha..."
+            placeholderTextColor="#999"
+            secureTextEntry={true}
+            value={this.state.senha}
+            onChangeText={(senha) => this.setState({ senha })}
+          />
 
-        <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Conectar</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
-  );
+          <TouchableOpacity onPress={this.handleSubmit} style={styles.button}>
+            <Text style={styles.buttonText}>Conectar</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
