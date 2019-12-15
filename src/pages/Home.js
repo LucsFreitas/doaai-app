@@ -1,7 +1,10 @@
 import React from 'react';
 import { 
+  ActivityIndicator,
+  AsyncStorage,
   FlatList,
   StyleSheet,
+  Button,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -12,32 +15,67 @@ import globalStyles from '../GlobalStyles';
 
 export default class Home extends React.Component  {
   state = {
-    pedidos: []
+    pedidos: [],
+    isRequesting: false
+  };
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Pedidos Pendentes',
+      headerRight: () => (
+        <Button
+          onPress={() => {
+            AsyncStorage.clear();
+            navigation.navigate('Login');
+          }}
+          title="Sair"
+          color="#f88"
+        />
+      ),
+    }
   };
 
   componentDidMount() {
+    this.setState({ isRequesting: true });
+
     api.get('/pedido')
       .then((response) => response.data)
-      .then((data) => this.setState({ pedidos: data }));
+      .then((data) => this.setState({ pedidos: data }))
+      .then(() => this.setState({ isRequesting: false }));
+  }
+
+  logout = () => {
+    AsyncStorage.clear();
+    this.props.navigation.navigate('Login');
   }
 
   navigateToDetail = function (pedido) {
     this.props.navigation.navigate('DetalhePedido', { pedido });
   }
 
+  loadList = () => {
+    return (
+      <FlatList
+        data={this.state.pedidos}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
+              <ListaPedido pedido={item}/>
+          </TouchableOpacity>
+        )}
+        style={styles.container}
+      />
+    )
+  }
+
   render () {
     return (
       <View style={globalStyles.safeAreaView}>
-        <FlatList
-          data={this.state.pedidos}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
-                <ListaPedido pedido={item}/>
-            </TouchableOpacity>
-          )}
-          style={styles.container}
-        />
+        { 
+          this.state.isRequesting
+          ? <ActivityIndicator style={styles.activity} size={'large'} color={'#33ace0'}/>
+          : this.loadList()
+        }
       </View>
     )
   }
@@ -46,5 +84,17 @@ export default class Home extends React.Component  {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-  }
+  },
+  activity: {
+    flex: 1,
+    alignSelf: 'center',
+  },
+  emptyMessage:{
+    fontSize: 20,
+  },
+  hasNoData: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

@@ -23,6 +23,10 @@ export default class Login extends React.Component {
     isRequesting: false,
   };
 
+  static navigationOptions = {
+    headerShown: false
+  };
+
   handleSubmit = async () => {
     if (this.canSubmit()) {
       this.setState({ isRequesting: true });
@@ -169,7 +173,6 @@ const styles = StyleSheet.create({
   },
 
   signIn: {
-    // color: '#354c90',
     marginTop: 15,
     alignSelf: 'center',
   },

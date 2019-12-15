@@ -8,10 +8,12 @@ import {
   View,
 } from 'react-native';
 
-import company from '../../assets/company.png';
 import globalStyles from '../GlobalStyles';
 
 export default class DetalhePedido extends React.Component{
+  static navigationOptions = {
+    title: 'Detalhes',
+  };
 
   render () {
     const { navigation } = this.props;
@@ -27,8 +29,6 @@ export default class DetalhePedido extends React.Component{
 
     return (
       <View style={globalStyles.safeAreaView}>
-        <Image style={globalStyles.company} source={company}/>
-
         <View style={styles.container}>
           <Text style={styles.nome}>{`${pedido.crianca.nome}`}</Text>
           <Text style={styles.tituloDetalhe}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    marginBottom: 20,
+    marginBottom: 10,
     marginLeft: 20,
     marginRight: 20,
   },
