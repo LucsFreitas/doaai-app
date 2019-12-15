@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,29 +9,29 @@ import {
 
 import globalStyles from '../GlobalStyles';
 
-export default class DetalhePedido extends React.Component{
+export default class DetalheDoacao extends React.Component{
   static navigationOptions = {
     title: 'Detalhes',
   };
 
   render () {
     const { navigation } = this.props;
-    const pedido = navigation.getParam('pedido', 'undefined');
+    const doacao = navigation.getParam('doacao', 'undefined');
 
     confirmar = () => {
-      navigation.navigate('PedidosPendentes');
+      navigation.navigate('DoacoesPendentes');
     }
 
     return (
       <View style={globalStyles.safeAreaView}>
         <View style={styles.container}>
-          <Text style={styles.nome}>{`${pedido.crianca.nome}`}</Text>
-          <Text style={styles.tituloDetalhe}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
-          <Text style={styles.tituloDetalhe}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
+          <Text style={styles.nome}>{`${doacao.crianca.nome}`}</Text>
+          <Text style={styles.tituloDetalhe}>{`Idade: ${doacao.crianca.idade} anos`}</Text>
+          <Text style={styles.tituloDetalhe}>{`Bairro: ${doacao.crianca.bairro}`}</Text>
           
-          <Text style={styles.tituloPedido}>Pedido:</Text>
+          <Text style={styles.tituloDoacao}>Pedido:</Text>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={styles.textoPedido}>{pedido.textoPedido + pedido.textoPedido}</Text>
+            <Text style={styles.textoDoacao}>{doacao.textoPedido + doacao.textoPedido}</Text>
           </ScrollView>
         </View>
 
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
 
-  tituloPedido:{
+  tituloDoacao:{
     fontSize: 18,
     color: '#333',
     fontWeight: "bold",
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 
-  textoPedido: {
+  textoDoacao: {
     fontSize: 17,
     textAlign:'justify',
   },

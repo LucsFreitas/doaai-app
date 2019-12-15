@@ -6,13 +6,13 @@ import {
   Text,
 } from 'react-native';
 
-function ListaPedido({ pedido, }) {
+function ListaDoacao({ doacao, }) {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.nome}>{pedido.crianca.nome}</Text>
-        <Text style={styles.detalhes}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
-        <Text style={styles.detalhes}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
+        <Text style={styles.nome}>{doacao.crianca.nome}</Text>
+        <Text style={styles.detalhes}>{`Idade: ${doacao.crianca.idade} anos`}</Text>
+        <Text style={styles.detalhes}>{`Bairro: ${doacao.crianca.bairro}`}</Text>
     </View>
   )
 }
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(ListaPedido);
+export default withNavigation(ListaDoacao);

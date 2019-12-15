@@ -7,14 +7,14 @@ import { StyleSheet, Text } from 'react-native';
 
 import Login from './pages/authPages/Login';
 import SignIn from './pages/authPages/SignIn';
-import PedidosPendentes from './pages/PedidosPendentes';
-import MeusPedidos from './pages/MeusPedidos';
+import DoacoesPendentes from './pages/DoacoesPendentes';
+import MinhasDoacoes from './pages/MinhasDoacoes';
 import ConfigPage from './pages/ConfigPage';
-import DetalhePedido from './pages/DetalhePedido';
+import DetalheDoacao from './pages/DetalheDoacao';
 import AuthLoadingScreen from './pages/AuthLoadingScreen';
 
-const DoacoesPendentesStack = createStackNavigator({ PedidosPendentes, DetalhePedido  });
-const MinhasDoacoesStack = createStackNavigator({ MeusPedidos, DetalhePedido  });
+const DoacoesPendentesStack = createStackNavigator({ DoacoesPendentes, DetalheDoacao  });
+const MinhasDoacoesStack = createStackNavigator({ MinhasDoacoes, DetalheDoacao  });
 const AuthStack = createStackNavigator({ Login, SignIn });
 const MainApp = createBottomTabNavigator(
   {

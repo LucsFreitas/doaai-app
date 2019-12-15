@@ -10,18 +10,18 @@ import {
 } from 'react-native';
 
 import api from '../services/api';
-import ListaPedido from '../components/ListaPedido';
+import ListaDoacao from '../components/ListaDoacao';
 import globalStyles from '../GlobalStyles';
 
-export default class MeusPedidos extends React.Component  {
+export default class MinhasDoacoes extends React.Component  {
   state = {
-    pedidos: [],
+    doacoes: [],
     isRequesting: false
   };
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Meus Pedidos',
+      title: 'Minhas Doações',
       headerRight: () => (
         <Button
           onPress={() => {
@@ -40,22 +40,22 @@ export default class MeusPedidos extends React.Component  {
 
     api.get(`usuario/${1}/pedido`)
       .then((response) => response.data)
-      .then((data) => this.setState({ pedidos: data }))
+      .then((data) => this.setState({ doacoes: data }))
       .then(() => this.setState({ isRequesting: false }));
   }
 
-  navigateToDetail = function (pedido) {
-    this.props.navigation.navigate('DetalhePedido', { pedido });
+  navigateToDetail = function (doacao) {
+    this.props.navigation.navigate('DetalheDoacao', { doacao });
   }
 
   loadList = () => {
     return (
       <FlatList
-        data={this.state.pedidos}
+        data={this.state.doacoes}
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
-              <ListaPedido pedido={item}/>
+              <ListaDoacao doacao={item}/>
           </TouchableOpacity>
         )}
         style={styles.container}
