@@ -38,7 +38,8 @@ export default class MinhasDoacoes extends React.Component  {
   componentDidMount() {
     this.setState({ isRequesting: true });
 
-    api.get(`usuario/${1}/pedido`)
+    AsyncStorage.getItem('doador')
+      .then((doador) => api.get(`doacao/?doadorId=${doador}`))
       .then((response) => response.data)
       .then((data) => this.setState({ doacoes: data }))
       .then(() => this.setState({ isRequesting: false }));

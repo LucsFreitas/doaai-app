@@ -51,7 +51,7 @@ export default class DoacoesPendentes extends React.Component  {
   componentDidMount() {
     this.setState({ isRequesting: true });
 
-    api.get('/pedido')
+    api.get('/doacao/pendentes')
       .then((response) => response.data)
       .then((data) => this.setState({ doacoes: data }))
       .then(() => this.setState({ isRequesting: false }));

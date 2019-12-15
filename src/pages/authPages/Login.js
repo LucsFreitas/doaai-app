@@ -36,12 +36,12 @@ export default class Login extends React.Component {
         .then(response => response.data)
         .then((data) => {
           this.setState({ isRequesting: false });
-          if (data.login){
-            AsyncStorage.setItem('user', data.login);
-          this.props.navigation.navigate('DoacoesPendentes');
-        }
-        else {
-          Alert.alert('Usuário/Senha inválidos');
+          if (data){
+            AsyncStorage.setItem('doador', data.toString());
+            this.props.navigation.navigate('DoacoesPendentes');
+          }
+          else {
+            Alert.alert('Usuário/Senha inválidos');
         }
       })
       .catch(() => {
