@@ -1,4 +1,3 @@
-import Constants from 'expo-constants';
 import { StyleSheet } from 'react-native';
 
 const globalStyles = StyleSheet.create({
@@ -11,7 +10,6 @@ const globalStyles = StyleSheet.create({
   
     safeAreaView: {
       flex: 1,
-      marginTop: Constants.statusBarHeight,
       backgroundColor: '#eee',
     }
   

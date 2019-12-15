@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "rn-project",
+    "name": "Doaai",
     "slug": "react-native-project",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -13,7 +13,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

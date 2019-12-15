@@ -9,14 +9,6 @@ export default function Login({ navigation }) {
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
 
-  useEffect(() => {
-    AsyncStorage.getItem('user').then(user => {
-      if (user) {
-        navigation.navigate('Home');
-      }
-    })
-  }, []);
-
   async function handleSubmit() {
     Keyboard.dismiss();
     

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import api from '../services/api';
 import ListaPedido from '../components/ListaPedido';
-import company from '../../assets/company.png';
 import globalStyles from '../GlobalStyles';
 
 export default function Home ({ navigation }) {
@@ -21,15 +20,22 @@ export default function Home ({ navigation }) {
 
   return (
     <View style={globalStyles.safeAreaView}>
-      <Image style={globalStyles.company} source={company}/>
-
-      <ScrollView>
-        { pedidos.map(item => (
+      <FlatList
+        data={pedidos}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
           <TouchableOpacity key={item.id} onPress={() => this.navigateToDetail(item)}>
               <ListaPedido pedido={item}/>
           </TouchableOpacity>
-        ))}
-      </ScrollView>
+        )}
+        style={styles.container}
+      />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 10,
+  }
+});

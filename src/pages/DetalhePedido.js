@@ -24,21 +24,13 @@ export default class ChildDetails extends React.Component{
 
         <View style={styles.container}>
           <Text style={styles.nome}>{`${pedido.crianca.nome}`}</Text>
-          {/* <Text style={styles.detalhe}>{pedido.crianca.nome}</Text> */}
           <Text style={styles.tituloDetalhe}>{`Idade: ${pedido.crianca.idade} anos`}</Text>
           <Text style={styles.tituloDetalhe}>{`Bairro: ${pedido.crianca.bairro}`}</Text>
+          
           <Text style={styles.tituloPedido}>Pedido:</Text>
-
-          {/* <Text style={styles.tituloDetalhe}>Nome:</Text>
-          <Text style={styles.detalhe}>{pedido.crianca.nome}</Text>
-          <Text style={styles.tituloDetalhe}>Idade:</Text>
-          <Text style={styles.detalhe}>{`${pedido.crianca.idade} anos`}</Text>
-          <Text style={styles.tituloDetalhe}>Bairro:</Text>
-          <Text style={styles.detalhe}>{pedido.crianca.bairro}</Text>
-          <Text style={styles.tituloDetalhe}>Pedido:</Text> */}
-          {/* <ScrollView> */}
-            <Text style={styles.textoPedido}>{pedido.textoPedido}</Text>
-          {/* </ScrollView> */}
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Text style={styles.textoPedido}>{pedido.textoPedido + pedido.textoPedido}</Text>
+          </ScrollView>
         </View>
 
         <View style={styles.buttons}>
