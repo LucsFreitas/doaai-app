@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
 const globalStyles = StyleSheet.create({
     company: {
@@ -10,6 +11,7 @@ const globalStyles = StyleSheet.create({
   
     safeAreaView: {
       flex: 1,
+      paddingTop: Constants.statusBarHeight,
       backgroundColor: '#eee',
     }
   
