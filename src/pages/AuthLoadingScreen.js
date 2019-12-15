@@ -12,7 +12,7 @@ import logo from '../../assets/logo.png';
 export default class AuthLoadingScreen extends React.Component {
   componentDidMount() {
     AsyncStorage.getItem('user').then(user => {
-        this.props.navigation.navigate(user ? 'Home' : 'Login');
+        this.props.navigation.navigate(user ? 'PedidosPendentes' : 'Login');
     })
   }
 

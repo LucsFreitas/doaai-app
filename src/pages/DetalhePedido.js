@@ -19,12 +19,8 @@ export default class DetalhePedido extends React.Component{
     const { navigation } = this.props;
     const pedido = navigation.getParam('pedido', 'undefined');
 
-    voltar = () => {
-      navigation.navigate('Home');
-    }
-
     confirmar = () => {
-      navigation.navigate('Home');
+      navigation.navigate('PedidosPendentes');
     }
 
     return (

@@ -38,7 +38,7 @@ export default class Login extends React.Component {
           this.setState({ isRequesting: false });
           if (data.login){
             AsyncStorage.setItem('user', data.login);
-          this.props.navigation.navigate('Home');
+          this.props.navigation.navigate('PedidosPendentes');
         }
         else {
           Alert.alert('Usuário/Senha inválidos');

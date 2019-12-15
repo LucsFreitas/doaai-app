@@ -13,7 +13,7 @@ import api from '../services/api';
 import ListaPedido from '../components/ListaPedido';
 import globalStyles from '../GlobalStyles';
 
-export default class Home extends React.Component  {
+export default class PedidosPendentes extends React.Component  {
   state = {
     pedidos: [],
     isRequesting: false
@@ -35,6 +35,19 @@ export default class Home extends React.Component  {
     }
   };
 
+  static tabBarOptions = () => {
+    return {
+      title: 'Pedidos Pendentes',
+      activeTintColor: '#e91e63',
+      labelStyle: {
+        fontSize: 12,
+      },
+      style: {
+        backgroundColor: 'blue',
+      },
+    }
+  }
+
   componentDidMount() {
     this.setState({ isRequesting: true });
 
@@ -42,11 +55,6 @@ export default class Home extends React.Component  {
       .then((response) => response.data)
       .then((data) => this.setState({ pedidos: data }))
       .then(() => this.setState({ isRequesting: false }));
-  }
-
-  logout = () => {
-    AsyncStorage.clear();
-    this.props.navigation.navigate('Login');
   }
 
   navigateToDetail = function (pedido) {
