@@ -18,7 +18,7 @@ export default class DoacoesPendentes extends React.Component  {
   };
 
   static navigationOptions = {
-    headerShown: false
+    title: 'Doações Disponíveis',
   };
 
   componentDidMount() {

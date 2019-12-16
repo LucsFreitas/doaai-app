@@ -11,7 +11,7 @@ const globalStyles = StyleSheet.create({
   
     safeAreaView: {
       flex: 1,
-      paddingTop: Constants.statusBarHeight,
+      // paddingTop: Constants.statusBarHeight,
       backgroundColor: '#eee',
     }
   

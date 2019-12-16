@@ -1,5 +1,7 @@
 import React from 'react';
 import { 
+  Alert,
+  AsyncStorage,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,19 +10,42 @@ import {
 } from 'react-native';
 
 import globalStyles from '../GlobalStyles';
+import api from '../services/api';
 
 export default class DetalheDoacao extends React.Component{
   static navigationOptions = {
     title: 'Detalhes',
   };
 
-  render () {
-    const { navigation } = this.props;
-    const doacao = navigation.getParam('doacao', 'undefined');
+  state = {
+    doacao: this.props.navigation.getParam('doacao', 'undefined'),
+  };
 
-    confirmar = () => {
-      navigation.navigate('DoacoesPendentes');
-    }
+  realizaDoacao = () => {
+    AsyncStorage.getItem('doador')
+      .then((doador) => api.post(`doacao/${this.state.doacao.id}/doar`,{ doadorId: doador }))
+      .then(() => {
+        Alert.alert('Doação realizada. Obrigado!');
+        this.props.navigation.navigate('MinhasDoacoes');
+      })
+      .catch(() => {
+        Alert.alert('Desculpe, ocorreu um erro na sua solicitação.');
+      })
+  }
+
+  doar = () => {
+    Alert.alert(
+      'Doar',
+      'Você confirma que irá realizar esta doação?',
+      [
+        { text: 'Cancelar' },
+        { text: 'Sim', onPress: () => this.realizaDoacao() },
+      ]
+    );
+  }
+
+  render () {
+    const doacao = this.state.doacao;
 
     return (
       <View style={globalStyles.safeAreaView}>
@@ -35,11 +60,16 @@ export default class DetalheDoacao extends React.Component{
           </ScrollView>
         </View>
 
-        <View style={styles.buttons}>
-          <TouchableOpacity onPress={confirmar} style={styles.button}>
-              <Text style={styles.buttonText}>Confirmar</Text>
-          </TouchableOpacity>
-        </View>
+        {
+          !this.state.doacao.doador && (
+            <View style={styles.buttons}>
+              <TouchableOpacity onPress={this.doar} style={styles.button}>
+                  <Text style={styles.buttonText}>Realizar Doação</Text>
+              </TouchableOpacity>
+            </View>
+          )
+        }
+        
       </View>
     )
   }
@@ -48,11 +78,11 @@ export default class DetalheDoacao extends React.Component{
 const styles = StyleSheet.create({
   button: {
     height: 42,
-    width: 300,
+    paddingHorizontal: 25,
     backgroundColor: '#33ace0',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 2,
+    borderRadius: 20,
   },
 
   buttons: {

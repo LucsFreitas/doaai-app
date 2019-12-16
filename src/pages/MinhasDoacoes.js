@@ -19,7 +19,7 @@ export default class MinhasDoacoes extends React.Component  {
   };
 
   static navigationOptions = {
-    headerShown: false
+    title: 'Minhas Doações',
   };
 
   componentDidMount() {

@@ -12,6 +12,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Linking } from 'expo';
 
 import { textoSobre } from '../data';
+import Constants from 'expo-constants';
 import GlobalSyles from '../GlobalStyles';
 
 export default class MaisPage extends React.Component  {
@@ -44,7 +45,7 @@ export default class MaisPage extends React.Component  {
     }
 
     return (
-      <View style={GlobalSyles.safeAreaView}>
+      <View style={styles.safeAreaView}>
         <View style={styles.container}>
           <Text style={styles.tituloSobre}>Sobre o DOAAI:</Text>
           <ScrollView style={styles.scroll}>
@@ -68,6 +69,11 @@ export default class MaisPage extends React.Component  {
 }
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#eee',
+  },
   button: {
     height: 42,
     paddingHorizontal: 35,
