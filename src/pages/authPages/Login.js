@@ -10,8 +10,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { Header } from 'react-navigation-stack';
 
 import logo from '../../../assets/logo.png';
 import api from '../../services/api';
@@ -62,50 +64,53 @@ export default class Login extends React.Component {
   loadForm = () => {
     return (
       <View style={styles.form}>
-        <Text style={styles.label}>Login *</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Seu login"
-          placeholderTextColor="#999"
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={this.state.login}
-          onChangeText={(login) => this.setState({ login })}
-          returnKeyType={'next'}
-          blurOnSubmit={false}
-          onSubmitEditing={() => this.senhaInput.focus()}
-        />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View>
+            <Text style={styles.label}>Login *</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Seu login"
+              placeholderTextColor="#999"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={this.state.login}
+              onChangeText={(login) => this.setState({ login })}
+              returnKeyType={'next'}
+              blurOnSubmit={false}
+              onSubmitEditing={() => this.senhaInput.focus()}
+            />
 
-        <Text style={styles.label}>Senha *</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Senha..."
-          placeholderTextColor="#999"
-          secureTextEntry={true}
-          value={this.state.senha}
-          onChangeText={(senha) => this.setState({ senha })}
-          ref={(input) => { this.senhaInput = input; }}
-          onSubmitEditing={this.handleSubmit}
-        />
+            <Text style={styles.label}>Senha *</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Senha..."
+              placeholderTextColor="#999"
+              secureTextEntry={true}
+              value={this.state.senha}
+              onChangeText={(senha) => this.setState({ senha })}
+              ref={(input) => this.senhaInput = input}
+              onSubmitEditing={this.handleSubmit}
+            />
 
-
-        <View style={styles.buttons}>
-          <TouchableOpacity onPress={this.handleSubmit} disabled={!this.canSubmit()}
-            style={[this.canSubmit() && styles.button, !this.canSubmit() && styles.buttonDisabled]}>
-            <Text style={styles.buttonText}>Conectar</Text>
-          </TouchableOpacity>
-          
-          <Text style={styles.signIn}>{`Ainda não é cadastrado? `}
-            <Text onPress={this.signIn} style={styles.signInButton}>Cadastre-se aqui.</Text>
-          </Text>
-        </View>
+            <View style={styles.buttons}>
+              <TouchableOpacity onPress={this.handleSubmit} disabled={!this.canSubmit()}
+                style={[this.canSubmit() && styles.button, !this.canSubmit() && styles.buttonDisabled]}>
+                <Text style={styles.buttonText}>Conectar</Text>
+              </TouchableOpacity>
+              
+              <Text style={styles.signIn}>{`Ainda não é cadastrado? `}
+                <Text onPress={this.signIn} style={styles.signInButton}>Cadastre-se aqui.</Text>
+              </Text>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     )
   }
 
   render () {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView keyboardVerticalOffset={Header.HEIGHT + 20} behavior="padding" style={styles.container}>
         <Image source={logo}/>
         { 
           this.state.isRequesting
