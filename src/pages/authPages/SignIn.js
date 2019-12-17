@@ -175,14 +175,13 @@ export default class SignIn extends React.Component {
 
   render () {
     return (
-      <KeyboardAvoidingView keyboardVerticalOffset={Header.HEIGHT + 20} behavior="position"
-        style={[!this.state.isRequesting && styles.container, this.state.isRequesting && styles.loading]}>
+      <View style={[!this.state.isRequesting && styles.container, this.state.isRequesting && styles.loading]}>
         {
           this.state.isRequesting
           ? <View style={styles.indicator}><ActivityIndicator style={styles.activity} size={'large'} color={'#33ace0'}/></View>
           : this.loadForm()
         }
-      </KeyboardAvoidingView>
+      </View>
     )
   }
 }
