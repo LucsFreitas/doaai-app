@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
   ActivityIndicator,
+  Alert,
   AsyncStorage,
   FlatList,
   StyleSheet,
@@ -23,13 +24,18 @@ export default class MinhasDoacoes extends React.Component  {
   };
 
   componentDidMount() {
+    this.refreshList();
+  }
+
+  refreshList() {
     this.setState({ isRequesting: true });
 
     AsyncStorage.getItem('doador')
       .then((doador) => api.get(`doacao/?doadorId=${doador}`))
       .then((response) => response.data)
       .then((data) => this.setState({ doacoes: data }))
-      .then(() => this.setState({ isRequesting: false }));
+      .catch(() => Alert.alert('Desculpe, ocorreu um erro na atualização da lista.'))
+      .finally(() => this.setState({ isRequesting: false}));
   }
 
   navigateToDetail = function (doacao) {
@@ -47,6 +53,8 @@ export default class MinhasDoacoes extends React.Component  {
           </TouchableOpacity>
         )}
         style={styles.container}
+        onRefresh={() => this.refreshList()}
+        refreshing={this.state.isRequesting}
       />
     )
   }

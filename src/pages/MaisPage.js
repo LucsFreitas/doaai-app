@@ -12,11 +12,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Linking } from 'expo';
 
 import { textoSobre } from '../data';
-import Constants from 'expo-constants';
-import GlobalSyles from '../GlobalStyles';
 
 export default class MaisPage extends React.Component  {
 
+  static navigationOptions = {
+    title: 'Mais Informações',
+  };
 
   linkNacc = () => {
     Linking.openURL('http://www.nacc.org.br/')
@@ -71,7 +72,6 @@ export default class MaisPage extends React.Component  {
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: '#eee',
   },
   button: {

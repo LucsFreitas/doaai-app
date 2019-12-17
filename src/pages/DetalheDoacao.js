@@ -9,6 +9,8 @@ import {
   View,
 } from 'react-native';
 
+import { NavigationActions, StackActions } from 'react-navigation'
+
 import globalStyles from '../GlobalStyles';
 import api from '../services/api';
 
@@ -26,7 +28,11 @@ export default class DetalheDoacao extends React.Component{
       .then((doador) => api.post(`doacao/${this.state.doacao.id}/doar`,{ doadorId: doador }))
       .then(() => {
         Alert.alert('Doação realizada. Obrigado!');
-        this.props.navigation.navigate('MinhasDoacoes');
+        this.props.navigation.dispatch(StackActions.reset({
+            index: 0,
+            actions: [ NavigationActions.navigate({ routeName: 'DoacoesPendentes'}) ]
+          })
+        );
       })
       .catch(() => {
         Alert.alert('Desculpe, ocorreu um erro na sua solicitação.');
@@ -69,7 +75,6 @@ export default class DetalheDoacao extends React.Component{
             </View>
           )
         }
-        
       </View>
     )
   }

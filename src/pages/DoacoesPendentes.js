@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
   ActivityIndicator,
+  Alert,
   FlatList,
   StyleSheet,
   TouchableOpacity,
@@ -22,16 +23,21 @@ export default class DoacoesPendentes extends React.Component  {
   };
 
   componentDidMount() {
+    this.refreshList();
+  }
+
+  navigateToDetail = function (doacao) {
+    this.props.navigation.navigate('DetalheDoacao', { doacao });
+  }
+
+  refreshList() {
     this.setState({ isRequesting: true });
 
     api.get('/doacao/pendentes')
       .then((response) => response.data)
       .then((data) => this.setState({ doacoes: data }))
-      .then(() => this.setState({ isRequesting: false }));
-  }
-
-  navigateToDetail = function (doacao) {
-    this.props.navigation.navigate('DetalheDoacao', { doacao });
+      .catch(() => Alert.alert('Desculpe, ocorreu um erro na atualização da lista.'))
+      .finally(() => this.setState({ isRequesting: false}));
   }
 
   loadList = () => {
@@ -45,6 +51,8 @@ export default class DoacoesPendentes extends React.Component  {
           </TouchableOpacity>
         )}
         style={styles.container}
+        onRefresh={() => this.refreshList()}
+        refreshing={this.state.isRequesting}
       />
     )
   }

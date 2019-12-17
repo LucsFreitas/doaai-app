@@ -16,11 +16,13 @@ import AuthLoadingScreen from './pages/AuthLoadingScreen';
 const DoacoesPendentesStack = createStackNavigator({ DoacoesPendentes, DetalheDoacao  });
 const MinhasDoacoesStack = createStackNavigator({ MinhasDoacoes, DetalheDoacao  });
 const AuthStack = createStackNavigator({ Login, SignIn });
+const MaisStack = createStackNavigator({ MaisPage });
+
 const MainApp = createBottomTabNavigator(
   {
     DoacoesPendentesStack,
     MinhasDoacoesStack,
-    MaisPage,
+    MaisStack,
   },
   {
     initialRouteName: 'DoacoesPendentesStack',
@@ -32,7 +34,7 @@ const MainApp = createBottomTabNavigator(
           iconName = 'list-ul';
         } else if (routeName === 'MinhasDoacoesStack') {
           iconName = 'user';
-        } else if (routeName === 'MaisPage') {
+        } else if (routeName === 'MaisStack') {
           iconName = 'ellipsis-h';
         }
 
@@ -45,7 +47,7 @@ const MainApp = createBottomTabNavigator(
           tabLabel = 'Doar';
         } else if (routeName === 'MinhasDoacoesStack') {
           tabLabel = 'Minhas Doações';
-        } else if (routeName === 'MaisPage') {
+        } else if (routeName === 'MaisStack') {
           tabLabel = 'Mais';
         }
         return <Text
